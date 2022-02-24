@@ -1,0 +1,23 @@
+version: "3"
+services:
+  php:
+    build: .
+    container_name: php-node
+    image: php-node
+    ports:
+      - 8080:80
+    links:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: glpi
+    ports:
+      - 3306:3306
+    restart: always
